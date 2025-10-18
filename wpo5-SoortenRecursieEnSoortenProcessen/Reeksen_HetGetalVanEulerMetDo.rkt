@@ -1,0 +1,7 @@
+(define (calc-e n)
+  (do ((i 1 (+ i 1))
+       (res 1 (+ res (/ 1 (* i fac-prev))))
+       (fac-prev 1 (* fac-prev i)))
+    ((> i n) res)
+    )
+  )

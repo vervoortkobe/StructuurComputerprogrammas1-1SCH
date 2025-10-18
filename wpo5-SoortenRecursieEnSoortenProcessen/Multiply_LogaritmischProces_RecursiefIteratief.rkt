@@ -1,0 +1,15 @@
+(define (double x) (+ x x))
+(define (halve x) (/ x 2))
+
+(define (rec-fast-multiply a b)
+  (cond ((= b 0) 0)
+        ((even? b) (rec-fast-multiply (double a) (halve b)))
+        (else (+ a (rec-fast-multiply a (- b 1)))))
+)
+
+(define (iter-fast-multiply a b)
+  (define (iter a b result)
+    (cond ((= b 0) result)
+          ((even? b) (iter (double a) (halve b) result))
+          (else (iter a (- b 1) (+ a result)))))
+  (iter a b 0))

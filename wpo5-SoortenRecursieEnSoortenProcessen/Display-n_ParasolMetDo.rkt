@@ -1,0 +1,17 @@
+(define (parasol n)
+  (do ((ctr 0 (+ ctr 1)))
+    ((= ctr n))
+    (display-n " " (- n ctr 1))
+    (display-n "*" (+ (* ctr 2) 1))
+    (newline))
+
+  (do ((ctr 0 (+ ctr 1)))
+    ((= ctr 3))
+    (display-n " " (- n 1))
+    (display "*")
+    (newline)))
+
+(define (display-n x n)
+  (do ((i 1 (+ i 1)))
+    ((> i n))
+    (display x)))

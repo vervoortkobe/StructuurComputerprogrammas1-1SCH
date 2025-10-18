@@ -1,0 +1,6 @@
+(define (display-n x n)
+  (do ((i 1 (+ i 1)))
+    ((> i n))
+  (display x)
+    )
+  )
