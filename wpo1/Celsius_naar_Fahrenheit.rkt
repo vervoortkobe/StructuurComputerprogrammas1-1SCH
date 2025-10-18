@@ -1,0 +1,1 @@
+(define (convert-c-to-f c) (- (* (+ c 40) 1.8) 40))
