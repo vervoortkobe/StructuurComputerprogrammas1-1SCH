@@ -1,0 +1,5 @@
+(define (last x) 
+  (cond ((null? x) #f)
+        ((null? (cdr x)) (car x))
+        (else (last (cdr x))))
+  )

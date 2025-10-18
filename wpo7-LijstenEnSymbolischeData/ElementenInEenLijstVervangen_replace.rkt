@@ -1,0 +1,7 @@
+(define (replace e1 e2 l)
+  (cond ((null? l) '())
+        ((eq? (car l) e1)
+         (cons e2 (replace e1 e2 (cdr l))))
+        (else (cons (car l) (replace e1 e2 (cdr l))))
+        )
+  )

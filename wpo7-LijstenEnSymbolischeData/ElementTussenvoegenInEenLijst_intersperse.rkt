@@ -1,0 +1,6 @@
+(define (intersperse e l)
+  (cond ((null? l) '())
+        ((null? (cdr l)) l)
+        (else (cons (car l) (cons e (intersperse e (cdr l)))))
+        )
+  )
