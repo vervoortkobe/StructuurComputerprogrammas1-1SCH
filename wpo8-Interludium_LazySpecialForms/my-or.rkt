@@ -1,0 +1,5 @@
+(define (my-or a b)
+  (cond (a #t)
+        (b #t)
+        (else #f))
+  )
