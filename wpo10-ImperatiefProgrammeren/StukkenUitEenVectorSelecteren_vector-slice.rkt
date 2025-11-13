@@ -1,0 +1,10 @@
+(define (vector-slice begin end vect)
+  (let* ((len (+ 1 (- end begin)))
+         (v (make-vector len)))
+    (do ((i 0 (+ i 1)))
+      ((= i len) v)
+      (vector-set! v i (vector-ref vect (+ begin i))))))
+
+(vector-slice 2 6 (vector 0 1 2 3 4 5 6 7 8 9))
+(vector-slice 3 3 (vector 0 1 2 3 4 5 6 7 8 9))
+(vector-slice 4 5 (vector "the" "quick" "brown" "fox" "jumps" "over" "the" "lazy" "dog"))
