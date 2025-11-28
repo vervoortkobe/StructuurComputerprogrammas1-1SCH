@@ -1,0 +1,10 @@
+(define (make-random m a seed)
+  (let ((xi seed))
+  (lambda ()
+    (set! xi (modulo (* xi a) m))
+    (exact->inexact (/ xi m)))))
+
+(define random (make-random (- (expt 2 32) 1) (expt 7 5) 97))
+(random)
+(random)
+(random)

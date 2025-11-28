@@ -1,0 +1,20 @@
+(define (make-random m a seed)
+  (let ((xi seed))
+  (define (generate)
+    (set! xi (modulo (* xi a) m))
+    (exact->inexact (/ xi m)))
+
+    (define (reset new-seed)
+      (set! xi new-seed))
+
+    (lambda (msg)
+      (cond ((eq? msg 'generate) generate)
+            ((eq? msg 'reset) reset)))))
+
+(define random (make-random (- (expt 2 32) 1) (expt 7 5) 99))
+((random 'generate))
+((random 'generate))
+((random 'generate))
+((random 'reset) 99)
+((random 'generate))
+((random 'generate))
