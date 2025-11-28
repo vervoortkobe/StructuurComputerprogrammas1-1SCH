@@ -1,27 +1,30 @@
-(define (maak-auto)
-  (let ((afgenomen 0)
-        (auto #f))
+(define (maak-auto capaciteit)
+  (let ((opgeladen 100)
+        (laadstation #f))
 
-    (define (withdraw! laatstation lading)
-      (if auto
-          (set! afgenomen (+ afgenomen lading))))
+    (define (charge!)
+      (if laadstation
+          (let ((lading-nodig (* (/ (- 100 opgeladen) 100)
+                                 capaciteit)))
+            ((laadstation 'withdraw!) lading-nodig)
+            (set! opgeladen 100))))
 
-    (define (koppel! obj)
-      (if (not auto)(set! auto obj)))
+    (define (koppel! station)
+      (cond ((not laadstation)
+             (set! laadstation station)
+             ((station 'koppel!) dispatch))))
+    
+    (define (ontkoppel!)
+      (cond (laadstation
+              ((laadstation 'ontkoppel!))
+              (set! laadstation #f))))
 
-    (define (ontkoppel! obj)
-      (if auto
-          (set! auto #f)))
-
-    (define (vrij? laadstation)
-      auto)
-             
     (define (dispatch msg)
-      (cond ((eq? msg 'withdraw!) withdraw)
-            ((eq? msg 'koppel!) koppel)
-            ((eq? msg 'ontkoppel!) ontkoppel)
-            ((eq? msg 'vrij?) (not auto))
-            (else (display "laadstation -- fout bericht"))))
+      (cond ((eq? msg 'charge) opgeladen)
+            ((eq? msg 'charge!) charge!)
+            ((eq? msg 'koppel!) koppel!)
+            ((eq? msg 'ontkoppel!) ontkoppel!)
+            (else (display "Auto -- fout bericht"))))
     dispatch))
 
 (define mijn-auto (maak-auto 70))
