@@ -1,0 +1,27 @@
+(define familieboom '(jan (piet (frans (tom)
+                                       (roel))
+                                (mie))
+                          (bram (inge (bert (ina)
+                                            (ilse))
+                                      (bart))
+                                (iris))
+                          (joost (els (ilse)))))
+
+(define (familiehoofd fam) (car fam))
+(define (kinderen fam) (cdr fam))
+(define (laatste-nakomeling? fam)
+  (null? (kinderen fam)))
+
+(define (verdeel boom budget)
+  (cond ((laatste-nakomeling? boom)
+         (list (list (familiehoofd boom) budget)))
+        (else (let* ((rest (kinderen boom))
+                     (new-budget (/ budget (length rest))))
+                (verdeel-in rest new-budget)))))
+
+(define (verdeel-in bomen budget)
+  (cond ((null? bomen) '())
+        (else (append (verdeel (car bomen) budget)
+                      (verdeel-in (cdr bomen) budget)))))
+
+(verdeel familieboom 3000)
